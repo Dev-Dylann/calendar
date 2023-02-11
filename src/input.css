@@ -17,10 +17,19 @@
     .trans-black {
         background-color: rgba(0, 0, 0, 0.6);
     }
+
 }
 
 .reminder-items {
-    @apply p-2 border border-slate-800 border-l-8;
+    @apply p-2 border border-slate-800 border-l-8 relative flex justify-between;
+}
+
+.delete-btn {
+    @apply text-red-500 w-10 text-center text-2xl;
+}
+
+.delete-btn-desktop {
+    @apply text-red-500 w-10 text-center text-2xl invisible transition-all;
 }
 
 .selected {

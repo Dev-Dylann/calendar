@@ -74,7 +74,7 @@ const deletePastReminders = (dateObj) => {
       const selected = entire[i];
       const selectedDateObj = selected.dateObj;
 
-      const presentDateObj = dateObj;
+      const presentDateObj = new Date();
 
       if (presentDateObj.year >= selectedDateObj.year) {
         const presentMonthIndex = arrays.months.indexOf(presentDateObj.month);
@@ -370,6 +370,10 @@ const showReminderList = (dateObj) => {
         reminderItem.classList.add(`reminder-items`, `dark:border-slate-300`);
         reminderItem.textContent = reminderArray[i];
         reminderList.append(reminderItem);
+        /* 
+        const deleteBtn = document.createElement(`i`);
+        reminderItem.append(deleteBtn);
+        deleteBtn.classList.add(`fa-solid`, `fa-trash`, `delete-btn`); */
       }
     } else {
       reminderList.innerHTML = ``;
@@ -404,7 +408,11 @@ const showDesktopReminderList = (dateObj) => {
       let i = 0;
       for (; i < count; i++) {
         const reminderItem = document.createElement(`li`);
-        reminderItem.classList.add(`reminder-items`, `dark:border-slate-300`);
+        reminderItem.classList.add(
+          `group`,
+          `reminder-items`,
+          `dark:border-slate-300`
+        );
         reminderItem.textContent = reminderArray[i];
         reminderList.append(reminderItem);
       }
