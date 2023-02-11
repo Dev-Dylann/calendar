@@ -25,11 +25,11 @@
 }
 
 .delete-btn {
-    @apply text-red-500 w-10 text-center text-2xl;
+    @apply text-red-500 w-10 text-center text-2xl invisible;
 }
 
-.delete-btn-desktop {
-    @apply text-red-500 w-10 text-center text-2xl invisible transition-all;
+.delete-btn-visible {
+    @apply text-red-500 w-10 text-center text-2xl visible;
 }
 
 .selected {

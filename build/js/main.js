@@ -370,10 +370,6 @@ const showReminderList = (dateObj) => {
         reminderItem.classList.add(`reminder-items`, `dark:border-slate-300`);
         reminderItem.textContent = reminderArray[i];
         reminderList.append(reminderItem);
-        /* 
-        const deleteBtn = document.createElement(`i`);
-        reminderItem.append(deleteBtn);
-        deleteBtn.classList.add(`fa-solid`, `fa-trash`, `delete-btn`); */
       }
     } else {
       reminderList.innerHTML = ``;
@@ -408,11 +404,7 @@ const showDesktopReminderList = (dateObj) => {
       let i = 0;
       for (; i < count; i++) {
         const reminderItem = document.createElement(`li`);
-        reminderItem.classList.add(
-          `group`,
-          `reminder-items`,
-          `dark:border-slate-300`
-        );
+        reminderItem.classList.add(`reminder-items`, `dark:border-slate-300`);
         reminderItem.textContent = reminderArray[i];
         reminderList.append(reminderItem);
       }
@@ -474,6 +466,109 @@ const setNewReminderDesktop = (dateObj) => {
     initApp(dateObj);
     reminderInput.value = ``;
   }
+};
+
+// ALLOWS USER TO DELETE REMINDERS
+
+const userDeleteReminder = (dateObj) => {
+  const allReminders = document.querySelectorAll(`.reminder-items`);
+
+  allReminders.forEach((reminder) => {
+    const deleteBtn = document.createElement(`i`);
+    reminder.append(deleteBtn);
+    deleteBtn.classList.add(`fa-solid`, `fa-trash`, `delete-btn`);
+  });
+
+  deleteMobile(dateObj);
+  deleteDesktop(dateObj);
+};
+
+const deleteMobile = (dateObj) => {
+  const mobileContainer = document.querySelector(`#reminder-modal`);
+
+  const allReminders = mobileContainer.querySelectorAll(`.reminder-items`);
+
+  allReminders.forEach((reminder, index) => {
+    reminder.onclick = () => {
+      const reminderDelete = reminder.querySelector(`i`);
+
+      reminderDelete.classList.replace(`delete-btn`, `delete-btn-visible`);
+
+      setTimeout(() => {
+        reminderDelete.classList.replace(`delete-btn-visible`, `delete-btn`);
+      }, 5000);
+
+      reminderDelete.onclick = () => {
+        let entire = localStorage.getItem(`DevDylanReminder`);
+        entire = JSON.parse(entire);
+        const length = entire.length;
+
+        const dateString = generateDateString(dateObj);
+
+        let i = 0;
+        for (; i < length; i++) {
+          const selected = entire[i];
+
+          if (dateString == selected.dateString) {
+            selected.reminder.splice(index, 1);
+
+            if (selected.reminder.length == 0) {
+              entire.splice(i, 1);
+            }
+          }
+        }
+
+        entire = JSON.stringify(entire);
+        localStorage.setItem(`DevDylanReminder`, entire);
+
+        initApp(dateObj);
+      };
+    };
+  });
+};
+
+const deleteDesktop = (dateObj) => {
+  const desktopContainer = document.querySelector(`#reminder-desktop`);
+
+  const allReminders = desktopContainer.querySelectorAll(`.reminder-items`);
+
+  allReminders.forEach((reminder, index) => {
+    reminder.onclick = () => {
+      const reminderDelete = reminder.querySelector(`i`);
+
+      reminderDelete.classList.replace(`delete-btn`, `delete-btn-visible`);
+
+      setTimeout(() => {
+        reminderDelete.classList.replace(`delete-btn-visible`, `delete-btn`);
+      }, 5000);
+
+      reminderDelete.onclick = () => {
+        let entire = localStorage.getItem(`DevDylanReminder`);
+        entire = JSON.parse(entire);
+        const length = entire.length;
+
+        const dateString = generateDateString(dateObj);
+
+        let i = 0;
+        for (; i < length; i++) {
+          const selected = entire[i];
+
+          if (dateString == selected.dateString) {
+            selected.reminder.splice(index, 1);
+
+            if (selected.reminder.length == 0) {
+              entire.splice(i, 1);
+            }
+          }
+        }
+
+        entire = JSON.stringify(entire);
+        localStorage.setItem(`DevDylanReminder`, entire);
+
+        initApp(dateObj);
+      };
+    };
+  });
 };
 
 // GENERATES A SHORTHAND DATE STRING FROM A DATE OBJECT
@@ -606,6 +701,7 @@ const initApp = (dateObj) => {
   userChangeMonth(dateObj);
   userChangeYear(dateObj);
   userChangeDate(dateObj);
+  userDeleteReminder(dateObj);
 };
 
 // GET TODAY'S DATE AND INITIATES THE APP

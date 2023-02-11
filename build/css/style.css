@@ -798,6 +798,7 @@ video {
 }
 
 .delete-btn {
+  visibility: hidden;
   width: 2.5rem;
   text-align: center;
   font-size: 1.5rem;
@@ -806,17 +807,14 @@ video {
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
-.delete-btn-desktop {
-  visibility: hidden;
+.delete-btn-visible {
+  visibility: visible;
   width: 2.5rem;
   text-align: center;
   font-size: 1.5rem;
   line-height: 2rem;
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
 }
 
 .selected {
