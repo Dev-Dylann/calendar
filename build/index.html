@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="DevDylan" />
+    <meta
+      name="description"
+      content="Simple Calendar App built with JavaScript"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevDylan - Calendar</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script defer src="js/main.js"></script>
+  </head>
+  <body
+    class="flex min-h-screen justify-center overflow-x-hidden bg-slate-300 p-4 pb-16 font-sans text-slate-800 dark:bg-slate-800 dark:text-slate-300"
+  >
+    <main class=" flex min-h-full sm:max-w-2xl  sm:max-h-fit sm:justify-center xl:max-w-7xl xl:items-center w-full flex-col gap-4 xl:flex-row-reverse">
+
+      <div id="past-date-warning" class="absolute w-full text-center transition-all font-medium xl:text-lg duration-300 -translate-y-full top-0 left-0 bg-red-700 text-slate-300">Reminders cannot be set for past dates</div>
+
+      <section class=" m-4 h-fit sm:m-6 flex sm:flex-col gap-4 sm:gap-6">
+        <div class="flex flex-col font-bold">
+          <p class="flex items-end gap-4">
+            <span id="current-date" class="text-6xl sm:text-7xl"></span>
+            <span id="current-day" class="text-md sm:text-lg"></span>
+          </p>
+          <select
+            class="bg-transparent text-3xl sm:w-max sm:text-4xl focus:outline-slate-800 dark:focus:outline-slate-300"
+            name="months"
+            id="months"
+          ></select>
+
+          <select
+            class="w-fit bg-transparent text-xl sm:text-2xl focus:outline-slate-800 dark:focus:outline-slate-300"
+            name="year"
+            id="year"
+          ></select>
+        </div>
+
+        <div id="reminder-count" class="grow text-md font-medium sm:text-xl">
+          <p id="reminder-num" class="hidden xl:hidden">No reminders set for this day.
+            Tap or Click to edit.
+          </p>
+
+          <article
+        id="reminder-desktop"
+        class="hidden xl:flex max-w-[280px]"
+      >
+        <div
+          class="flex w-full flex-col gap-4 sm:max-w-lg bg-slate-300 dark:bg-slate-800"
+        >
+          <h2 id="reminder-title" class="text-2xl font-bold">
+            Reminders for
+          </h2>
+
+            <textarea id="reminder-input"
+              type="text"
+              class="border disabled:brightness-50 border-slate-800 resize-none bg-transparent p-2 focus:outline-slate-800 dark:focus:outline-slate-300 dark:border-slate-300 sm:text-lg"
+              placeholder="Enter new reminder..."
+            ></textarea>
+
+            <button id="add-new"
+              class="text-lg disabled:brightness-50 bg-slate-800 py-1 px-5 font-bold text-slate-300 dark:bg-slate-300 dark:text-slate-800"
+            >
+              Add New Reminder
+            </button>
+
+          <ul class="space-y-2 text-xl mt-4" id="reminder-list"></ul>
+
+        </div>
+      </article>
+
+        </div>
+      </section>
+
+      <article
+        id="reminder-modal"
+        class="trans-black fixed top-0 left-0 flex h-screen w-full xl:hidden translate-x-full items-center justify-center p-6 transition-all duration-300"
+      >
+        <div
+          class="flex w-full flex-col gap-4 sm:max-w-lg bg-slate-300 p-4 dark:bg-slate-800"
+        >
+          <h2 id="reminder-title" class="text-2xl sm:text-3xl font-bold">
+            Reminders for
+          </h2>
+
+            <input id="reminder-input"
+              type="text"
+              class="border border-slate-800 bg-transparent p-2 focus:outline-none dark:border-slate-300 sm:text-lg"
+              placeholder="Add new reminder..."
+            />
+
+            <button id="add-new"
+              class="sm:text-lg text-md bg-slate-800 py-1 px-5 font-bold text-slate-300 dark:bg-slate-300 dark:text-slate-800"
+            >
+              Add
+            </button>
+          </form>
+
+          <ul class="space-y-2 text-lg mt-4 sm:text-xl" id="reminder-list"></ul>
+
+          <button
+            id="close-modal"
+            class="sm:text-lg text-md mt-5 self-end bg-slate-800 py-2 px-5 font-bold text-slate-300 dark:bg-slate-300 dark:text-slate-800"
+          >
+            Close
+          </button>
+        </div>
+      </article>
+
+      <section class="text-lg xl:text-2xl flex m-4 sm:m-6 grow sm:max-h-[600px] xl:min-h-[600px] flex-col  ">
+        <div class="grid h-10 grid-cols-7 xl:h-14">
+          <div class="days">S</div>
+          <div class="days">M</div>
+          <div class="days">T</div>
+          <div class="days">W</div>
+          <div class="days">T</div>
+          <div class="days">F</div>
+          <div class="days">S</div>
+        </div>
+
+        <div id="date-container" class="grid grow grid-cols-7 grid-rows-6">
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+          <div class="dates xl:text-2xl sm:text-xl border-slate-800 dark:border-slate-300"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

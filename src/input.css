@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .days {
+        @apply text-center text-red-600 font-bold;
+    }
+
+    .dates {
+        @apply text-center p-2 text-lg font-bold;
+    }
+}
+
+@layer utilities {
+    .trans-black {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.reminder-items {
+    @apply p-2 border border-slate-800 border-l-8;
+}
+
+.selected {
+    @apply border-4;
+}
