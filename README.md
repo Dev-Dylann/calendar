@@ -12,4 +12,4 @@ What this project accomplishes:
 ## Links
 
 - [View Code](github.com/Dev-Dylann/calendar/)
-- [View Live Site](dev-Dylan.github.io.calendar/build/)
+- [View Live Site](dev-dylan.github.io.calendar/build/)
