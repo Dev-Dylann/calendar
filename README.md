@@ -8,3 +8,8 @@ What this project accomplishes:
   - Set reminders for any future date
 - Prevents users from setting reminders on past dates
 - Automatically deletes reminders of past dates
+
+## Links
+
+- [View Code](github.com/Dev-Dylann/calendar/)
+- [View Live Site](dev-Dylan.github.io.calendar/build/)
