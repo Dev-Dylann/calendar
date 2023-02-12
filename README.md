@@ -33,5 +33,5 @@ Check any date and set reminders with this calendar application.
 - Semantic HTML5 markup
 - [Tailwind](https://tailwindcss.com) - CSS Framework
 - JavaScript
-- Icons from [Font Awesome]()
-- Font from [Google Fonts]()
+- Icons from [Font Awesome](https://fontawesome.com/search?m=free&o=r)
+- Font from [Google Fonts](https://fonts.google.com/)
